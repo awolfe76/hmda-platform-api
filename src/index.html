@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page title</title>
+    <!-- Update the link path to where your stylesheet file is located. For example: /path/to/yourcss/lib/uswds.min.css -->
+    <link href="css/prism.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/app.min.css">
+  </head>
+  <body>
+  <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+  <header class="usa-header usa-header-basic" role="banner">
+    <!-- Gov banner BEGIN -->
+    <div class="usa-banner">
+      <header class="usa-banner-header">
+        <div class="usa-grid usa-banner-inner">
+        <img src="img/favicons/favicon-57.png" alt="U.S. flag">
+        <p>An official website of the United States government</p>
+        </div>
+      </header>
+    </div>
+    <!-- Gov banner END -->
+    <div class="usa-nav-container">
+      <div class="usa-navbar">
+        <button class="usa-menu-btn">Menu</button>
+        <div class="usa-logo" id="logo">
+          <em class="usa-logo-text">
+            <a href="#" title="Home" aria-label="Federal Agency Name Home">Federal <br>Agency Name</a>
+          </em>
+        </div>
+      </div>
+      <nav role="navigation" class="usa-nav">
+        <button class="usa-nav-close">
+          <img src="img/close.svg" alt="close">
+        </button>
+        <ul class="usa-nav-primary usa-accordion">
+          <li>
+            <a class="usa-nav-link">
+              <span>Section title</span>
+            </a>
+          </li>
+          <li>
+            <a class="usa-nav-link">
+              <span>Simple terms</span>
+            </a>
+          </li>
+          <li>
+            <a class="usa-nav-link" href="#">
+              <span>Distinct from each other</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main style="width:100%;" class="usa-grid usa-section usa-content usa-layout-docs" id="main-content">
+    <aside class="usa-width-one-fourth usa-layout-docs-sidenav">
+      <ul class="usa-sidenav-list">
+        <li>
+          <a class="usa-current" href="#instutions">Institutions</a>
+        </li>
+        <li>
+          <a href="#modified-lar">Modified LAR</a>
+        </li>
+        <li>
+          <a href="#check-digit">Check Digit</a>
+        </li>
+      </ul>
+    </aside>
+    <div class="usa-width-three-fourths usa-layout-docs-main_content">
+      <h1 id="#instutions">Institutions</h1>
+      <p class="usa-font-lead">Query the list of known institutions on the HMDA Platform.</p>
+      <hr>
+      <p>Using the <code>/institutions</code> endpoint you can provide an email domain and get a response containing a list of insitutions that use that email domain.</p>
+      <h5>Allowed Methods</h5>
+      <p>Only the <code>GET</code> method is allowed.</p>
+      <h5>Example</h5>
+      <pre><code class="language-bash">https://ffiec.cfpb.gov/public/insitutions?domain=bank0.com</code></pre>
+      <h5>Example Response</h5>
+      <pre><code class="language-json">{
+  "institutions": [
+    {
+      "id": "0",
+      "name": "Bank 0",
+      "domains": ["test@bank0.com"],
+      "externalIds": [
+        {
+          "value": "1234",
+          "name": "occ-charter-id"
+        },
+        {
+          "value": "1234",
+          "name": "ncua-charter-id"
+        }
+      ]
+    }
+  ]
+}</code></pre>
+    </div>
+  </main>
+  <footer class="usa-footer usa-footer-medium" role="contentinfo">
+    <div class="usa-grid usa-footer-return-to-top">
+      <a href="#">Return to top</a>
+    </div>
+    <div class="usa-footer-primary-section">
+      <div class="usa-grid-full">
+        <nav class="usa-footer-nav">
+          <ul class="usa-unstyled-list">
+            <li class="usa-width-one-fourth usa-footer-primary-content">
+              <a class="usa-footer-primary-link" href="javascript:void(0);">Primary link</a>
+            </li>
+            <li class="usa-width-one-fourth usa-footer-primary-content">
+              <a class="usa-footer-primary-link" href="javascript:void(0);">Permanently relevant</a>
+            </li>
+            <li class="usa-width-one-fourth usa-footer-primary-content">
+              <a class="usa-footer-primary-link" href="javascript:void(0);">Easy to understand</a>
+            </li>
+            <li class="usa-width-one-fourth usa-footer-primary-content">
+              <a class="usa-footer-primary-link" href="javascript:void(0);">Site policies (example)</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="usa-footer-secondary_section">
+      <div class="usa-grid">
+        <div class="usa-footer-logo usa-width-one-half">
+          <img class="usa-footer-logo-img" src="img/logo-img.png" alt="Logo image">
+          <h3 class="usa-footer-logo-heading">Name of Agency</h3>
+        </div>
+        <div class="usa-footer-contact-links usa-width-one-half">
+          <a class="usa-link-facebook" href="javascript:void(0);">
+            <span>Facebook</span>
+          </a>
+          <a class="usa-link-twitter" href="javascript:void(0);">
+            <span>Twitter</span>
+          </a>
+          <a class="usa-link-youtube" href="javascript:void(0);">
+            <span>YouTube</span>
+          </a>
+          <a class="usa-link-rss" href="javascript:void(0);">
+            <span>RSS</span>
+          </a>
+          <address>
+            <h3 class="usa-footer-contact-heading">Agency Contact Center</h3>
+            <p>(800) CALL-GOVT</p>
+            <a href="mailto:info@agency.gov">info@agency.gov</a>
+          </address>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="js/prism.js"></script>
+  </body>
+</html>
