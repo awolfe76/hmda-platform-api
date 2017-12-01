@@ -39,7 +39,7 @@
     </div>
   </header>
   <main style="width:100%;" class="usa-grid usa-section usa-content usa-layout-docs" id="main-content">
-    <!--<aside class="usa-width-one-fourth usa-layout-docs-sidenav">
+    <aside class="usa-width-one-fourth usa-layout-docs-sidenav">
       <ul class="usa-sidenav-list">
         <li>
           <a class="usa-current" href="#institutions">Institutions</a>
@@ -56,30 +56,67 @@
           </ul>
         </li>
       </ul>
-    </aside>-->
+    </aside>
     <div class="usa-width-three-fourths usa-layout-docs-main_content">
-      <h1>HMDA Platform API</h1>
+      <h1 id="check-digit">Check digit</h1>
       <hgroup>
-        <h3>What is this?</h3>
-        <h4>Well, let me tell you all about it.</h4>
+        <h2 id="check-digit-generation">Generation</h2>
+        <h3>Generate a check digit and full ULI from a loan id.</h3>
+        <h4>Using the <code>/uli/checkDigit</code> endpoint provide a loan id and get the check digit and full ULI in a response.</h4>
       </hgroup>
-      <h5>URL</h5>
-      <p>All API calls go here:</p>
-      <pre><code>https://ffiec-api.cfpb.gov/public</code></pre>
-      <h5>Current status</h5>
-      <p>Make an API call and get the current status</p>
-      <h5>CORS ready, no auth</h5>
-      <p>We're ready for front-end calls too, no auth required.</p>
-      <h5>Versions</h5>
-      <p>v1.18.0 is live.</p>
-      <h5>HTTP Verbs</h5>
-      <p>We have <code>GET</code> and <code>POST</code>.</p>
+      <h5>Allowed Methods</h5>
+      <code>POST</code>
       <h5>Parameters</h5>
-      <p>Probably not needed here, but just in case.</p>
-      <h5>Error Codes</h5>
-      <p>Common error codes are:</p>
-      <h5>The future</h5>
-      <p>HMDA Platform plans on x,y, and z.</p>
+      <table>
+        <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>loanId</code></td><td><code>string</code></td><td>A valid loan id.</td>
+        </tbody>
+      </table>
+      <h5>Example</h5>
+      <pre><code class="language-bash">POST /uli/checkDigit</code></pre>
+      <h5>Example payload</h5>
+      <section class="code-block">
+        <code>JSON</code><pre><code class="language-json">{
+  "loanId": "10Bx939c5543TqA1144M999143X"
+}</code></pre></section>
+      <h5>Example Response</h5>
+      <section class="code-block">
+        <code>JSON</code>
+      <pre><code class="language-json">{
+    "loanId": "10Cx939c5543TqA1144M999143X",
+    "checkDigit": 10,
+    "uli": "10Cx939c5543TqA1144M999143X10"
+}</code></pre></section>
+
+  <hgroup>
+    <h2 id="check-digit-validation">Validation</h2>
+    <h3>Validates that a ULI has the correct check digit.</h3>
+    <h4>Using the <code>/uli/validate</code> endpoint you can provide a ULI and get the response of valid or not.</h4>
+  </hgroup>
+      <h5>Allowed Methods</h5>
+      <code>POST</code>
+      <h5>Parameters</h5>
+      <table>
+        <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>uli</code></td><td><code>string</code></td><td>A ULI.</td></tr>
+        </tbody>
+      </table>
+      <h5>Example</h5>
+      <pre><code class="language-bash">POST /uli/validate</code></pre>
+      <h5>Example payload</h5>
+      <section class="code-block">
+        <code>JSON</code><pre><code class="language-json">{
+  "uli": "10Bx939c5543TqA1144M999143X38"
+}</code></pre></section>
+      <h5>Example Response</h5>
+      <section class="code-block">
+        <code>JSON</code>
+      <pre><code class="language-json">{
+    "isValid": true
+}</code></pre>
+</section>
     </div>
   </main>
   <footer class="usa-footer usa-footer-medium" role="contentinfo">

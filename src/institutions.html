@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Page title</title>
+  <link href="css/prism.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.min.css">
+</head>
+<body>
+  <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+  <header class="usa-header usa-header-basic" role="banner">
+    <!-- Gov banner BEGIN -->
+    <div class="usa-banner">
+      <header class="usa-banner-header">
+        <div class="usa-grid usa-banner-inner">
+          <img src="img/favicons/favicon-57.png" alt="U.S. flag">
+          <p>An official website of the United States government</p>
+        </div>
+      </header>
+    </div>
+    <!-- Gov banner END -->
+    <div class="usa-nav-container">
+      <div class="usa-navbar">
+        <div class="usa-logo" id="logo">
+          <em class="usa-logo-text">
+          <a href="#" title="Home" aria-label="Federal Agency Name Home"><img src="./img/ffiec-logo.png" height="25px"></a>
+          </em>
+        </div>
+      </div>
+      <nav role="navigation" class="usa-nav">
+        <ul class="usa-nav-primary">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="institutions.html">Institutions</a></li>
+          <li><a href="check-digit.html">Check Digit</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="usa-grid usa-section usa-content usa-layout-docs" id="main-content">
+    <aside class="usa-layout-docs-sidenav">
+      <ul class="usa-sidenav-list">
+      <li>
+        <a class="usa-current" href="#institutions">Institutions</a>
+        <ul class="usa-sidenav-sub_list">
+          <li><a href="#institutions-search">Search</a></li>
+          <li><a href="#institutions-modified-lar">Modified LAR</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#check-digit">Check Digit</a>
+        <ul class="usa-sidenav-sub_list">
+          <li><a href="#check-digit-generation">Generation</a></li>
+          <li><a href="#check-digit-validation">Validation</a></li>
+        </ul>
+      </li>
+      </ul>
+    </aside>
+    <div class="usa-layout-docs-main_content">
+      <div style="width: 70%; float: left;">
+      <h1 id="institutions">Institutions</h1>
+      <hgroup>
+      <h2 id="institutions-search">Search</h2>
+      <h3>Query the list of known institutions on the HMDA Platform.</h3>
+      <h4>Using the <code>/institutions</code> endpoint you can provide email domain and get a response containing a list of insitutions that use that email domain.</h4>
+      </hgroup>
+      <h5>Allowed Methods</h5>
+      <code>GET</code>
+      <h5>Parameters</h5>
+      <p class="usa-text-small">Passed in as a query string.</p>
+      <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>domain</code></td>
+          <td><code>string</code></td>
+          <td>Any email domain.</td>
+        </tr>
+      </tbody>
+      </table>
+      <h5>Example</h5>
+      <pre><code class="language-bash">GET /institutions?domain=bank0.com</code></pre>
+      <h5>Example Response</h5>
+      <section class="code-block">
+      <code>JSON</code>
+          <pre><code class="language-json">{
+        "institutions": [
+          {
+            "id": "0",
+            "name": "Bank 0",
+            "domains": ["test@bank0.com"],
+            "externalIds": [
+              {
+                "value": "1234",
+                "name": "occ-charter-id"
+              },
+              {
+                "value": "1234",
+                "name": "ncua-charter-id"
+              }
+            ]
+          }
+        ]
+      }</code></pre>
+      </section>
+      <hgroup>
+      <h2 id="institutions-modified-lar">Modified LAR</h2>
+      <h3>Return a modified LAR, in CSV format for a given institution and filing period.</h3>
+      <h4>Using the <code>/institutions</code> endpoint you can provide an institution id and filing period (year) and get the modified LAR.</h4>
+      </hgroup>
+      <h5>Allowed Methods</h5>
+      <code>GET</code>
+      <h5>Parameters</h5>
+      <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>institutionId</code></td>
+        <td><code>string</code></td>
+        <td>The institution id.</td>
+      </tr>
+      <tr>
+        <td><code>period</code></td>
+        <td><code>string</code></td>
+        <td>The filing period.</td>
+      </tr>
+      </tbody>
+      </table>
+      <h5>Example</h5>
+      <section class="code-block">
+      <code>JSON</code>
+      <pre><code class="language-bash">GET /institutions/:institutionId/filings/:period/lar</code></pre>
+      </section>
+      <h5>Example Response</h5>
+      <p>The response is in <code>CSV</code> format. The schema is as follows:<pre><code class="language-bash">id
+      respondent_id
+      agency_code
+      preapprovals
+      action_taken_type
+      purchaser_type
+      rate_spread
+      hoepa_status
+      lien_status
+      loan_type
+      property_type
+      purpose
+      occupancy
+      amount
+      msa
+      state
+      county
+      tract
+      ethnicity
+      co_ethnicity
+      race1
+      race2
+      race3
+      race4
+      race5
+      co_race1
+      co_race2
+      co_race3
+      co_race4
+      co_race5
+      sex
+      co_sex
+      income
+      denial_reason1
+      denial_reason2
+      denial_reason3
+      period</code></pre></p>
+      <p class="usa-text-small">For a definition of these fields, please consult the <a href="http://www.consumerfinance.gov/data-research/hmda/static/for-filers/2017/2017-HMDA-FIG.pdf" title="HMDA Filing Instructions Guide">HMDA Filing Instructions Guide</a>.</p>
+      <p class="usa-text-small">Please note that the Modified LAR does not include the following fields listed in the HMDA Filing Instructions Guide:
+      <ul>
+      <li><code>Loan Application Number</code></li>
+      <li><code>Date Application Received</code></li>
+      <li><code>Date of Action</code></li>
+      </ul>
+      </p>
+    <footer class="usa-footer usa-footer-medium" role="contentinfo"><div class="usa-grid usa-footer-return-to-top"><a href="#">Return to top</a></div><div class="usa-footer-primary-section"><div class="usa-grid-full"><nav class="usa-footer-nav"><ul class="usa-unstyled-list"><li class="usa-width-one-fourth usa-footer-primary-content"><a class="usa-footer-primary-link" href="javascript:void(0);">Primary link</a></li><li class="usa-width-one-fourth usa-footer-primary-content"><a class="usa-footer-primary-link" href="javascript:void(0);">Permanently relevant</a></li><li class="usa-width-one-fourth usa-footer-primary-content"><a class="usa-footer-primary-link" href="javascript:void(0);">Easy to understand</a></li><li class="usa-width-one-fourth usa-footer-primary-content"><a class="usa-footer-primary-link" href="javascript:void(0);">Site policies (example)</a></li></ul></nav></div></div><div class="usa-footer-secondary_section"><div class="usa-grid"><div class="usa-footer-logo usa-width-one-half"><img class="usa-footer-logo-img" src="img/logo-img.png" alt="Logo image"><h3 class="usa-footer-logo-heading">Name of Agency</h3></div><div class="usa-footer-contact-links usa-width-one-half"><a class="usa-link-facebook" href="javascript:void(0);"><span>Facebook</span> </a><a class="usa-link-twitter" href="javascript:void(0);"><span>Twitter</span> </a><a class="usa-link-youtube" href="javascript:void(0);"><span>YouTube</span> </a><a class="usa-link-rss" href="javascript:void(0);"><span>RSS</span></a><address><h3 class="usa-footer-contact-heading">Agency Contact Center</h3><p>(800) CALL-GOVT</p><a href="mailto:info@agency.gov">info@agency.gov</a></address></div></div></div></footer>
+    </div></div>
+  </main>
+  <script src="js/prism.js"></script></body></html>

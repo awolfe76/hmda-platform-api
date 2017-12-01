@@ -10,10 +10,11 @@
     "postinstall": "yarn run clearDist && yarn run build",
     "clearDist": "rimraf ./dist && mkdirp ./dist ./dist/js ./dist/css ./dist/fonts ./dist/img",
     "build": "yarn run sass && yarn run html && yarn run img",
-    "html": "html-minifier --collapse-whitespace ./src/index.html -o ./dist/index.html",
+    "html": "html-minifier --collapse-whitespace --file-ext html --input-dir ./src --output-dir ./dist",
     "sass": "node-sass --quiet --output-style=compressed --source-map=./dist/css/ ./src/sass/app.scss ./dist/css/app.min.css && cp node_modules/uswds/src/fonts/sourcesanspro-* ./dist/fonts && yarn run sass:prefix",
     "sass:prefix": "postcss -u autoprefixer -r ./dist/css/*.css",
-    "img": "cp -r ./node_modules/uswds/dist/img/* ./dist/img",
+    "watch:sass": "node-sass --watch --quiet --output-style=compressed --source-map=./dist/css/ ./src/sass/app.scss ./dist/css/app.min.css",
+    "img": "cp ./src/img/* ./dist/img && cp -r ./node_modules/uswds/dist/img/* ./dist/img",
     "js": "cp -r ./src/js/prism.js ./dist/js",
     "css": "cp -r ./src/sass/prism.css ./dist/css"
   },
